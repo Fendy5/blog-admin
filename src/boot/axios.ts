@@ -21,6 +21,7 @@ api.interceptors.response.use(
     // code-0,请求成功；code-1，未登录；code-2,服务器返回失败信息
     if (res.code === 0) {
       res.message && Notify.create({
+        type: 'positive',
         message: res.message
       })
       return res
