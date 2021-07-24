@@ -28,7 +28,7 @@
       <q-list bordered padding class="rounded-borders text-primary">
         <q-item-label
           header
-          class="text-grey-8"
+          class="text-primary text-h6"
         >
           Fendy博客的后台管理
         </q-item-label>
@@ -97,12 +97,15 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+@import "src/css/quasar.variables";
 a {
   text-decoration: none;
   color: black;
 }
 .app-content {
   position: relative;
+  background: $bg;
+  padding: 24px;
   height: calc(100vh - 50px);
 }
 </style>

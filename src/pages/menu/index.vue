@@ -24,8 +24,8 @@
         </q-card-section>
         <q-card-section class="q-pt-none">
           <q-form class="q-gutter-md">
-            <q-input v-model="form.name" label="菜单名称"  lazy-rules :rules="[ val => val && val.length > 0 || '菜单名称不可空']"/>
-            <q-input v-model="form.path" label="菜单路径" lazy-rules :rules="[val => val !== null && val !== '' || '菜单路径不可空']"/>
+            <q-input v-model="formData.name" label="菜单名称"  :rules="[ val => val && val.length > 0 || '菜单名称不可空']"/>
+            <q-input v-model="formData.path" label="菜单路径"  :rules="[val => val !== null && val !== '' || '菜单路径不可空']"/>
             <div>
               <q-btn label="确定"  @click="submitMenuForm" color="primary" />
               <q-btn label="取消" type="reset" color="primary" v-close-popup flat class="q-ml-sm" />
@@ -39,22 +39,29 @@
 
 <script lang="ts">
 import { reactive, ref, toRefs, onBeforeMount } from 'vue'
-import { addMenuApi, deleteMenuApi, editMenuApi, getMenuListApi } from '../../api/menu'
+import { addMenuApi, deleteMenuApi, editMenuApi, getMenuListApi } from 'src/api/menu'
+
+export interface MenuForm {
+  parentId: number | null,
+  name: string,
+  path: string
+}
 
 export default {
   setup () {
-    const selected = ref(null)
-    const tree = ref(null)
+    const selected = ref(0)
+    const tree = ref()
     const prompt = ref(false)
+    const title = ref('新增菜单')
+
+    const formData = reactive<MenuForm>({
+      parentId: null,
+      name: '',
+      path: ''
+    })
 
     const state = reactive({
-      title: '新增菜单',
-      id: null,
-      form: {
-        parent_id: null,
-        name: null,
-        path: null
-      },
+      id: 0,
       menuList: [
         {
           name: '菜单管理',
@@ -65,37 +72,37 @@ export default {
 
     function editMenu () {
       const menu = tree.value.getNodeByKey(selected.value)
-      state.form.name = menu.name
-      state.title = '编辑菜单'
-      state.form.path = menu.path
-      state.id = selected
+      formData.name = menu.name
+      title.value = '编辑菜单'
+      formData.path = menu.path
+      state.id = selected.value
       prompt.value = true
     }
 
     function deleteMenu () {
       void deleteMenuApi(selected.value).then(() => {
         getMenuList()
-        selected.value = null
+        selected.value = 0
       })
     }
 
     function addMenu () {
-      state.form.name = null
-      state.form.path = null
-      state.form.parent_id = selected
-      state.title = '新增菜单'
+      formData.name = ''
+      formData.path = ''
+      formData.parentId = selected.value
+      title.value = '新增菜单'
       prompt.value = true
     }
 
     function submitMenuForm () {
       if (state.id) {
-        void editMenuApi(state.form, state.id).then(() => {
+        void editMenuApi(formData, state.id).then(() => {
           prompt.value = false
-          state.id = null
+          state.id = 0
           getMenuList()
         })
       } else {
-        void addMenuApi(state.form).then(() => {
+        void addMenuApi(formData).then(() => {
           prompt.value = false
           getMenuList()
         })
@@ -113,15 +120,16 @@ export default {
     }
 
     return {
-      deleteMenu,
-      submitMenuForm,
+      title,
+      formData,
       prompt,
       tree,
       selected,
+      deleteMenu,
+      submitMenuForm,
       addMenu,
       editMenu,
-      ...toRefs(state),
-      address: ref('')
+      ...toRefs(state)
     }
   }
 }

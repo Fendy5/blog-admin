@@ -6,7 +6,7 @@ export const getMenuListApi = () =>
     method: 'get'
   })
 
-export const addMenuApi = (data: never) =>
+export const addMenuApi = (data: any) =>
   api({
     url: '/api/v1/menus',
     method: 'post',
@@ -19,9 +19,9 @@ export const deleteMenuApi = (id: number) =>
     method: 'delete'
   })
 
-export const editMenuApi = (data: never, id: number) =>
+export const editMenuApi = (data: any, id: number|null) =>
   api({
-    url: `/api/v1/menus/${id}`,
+    url: `/api/v1/menus/${id || ''}`,
     method: 'put',
     data
   })
