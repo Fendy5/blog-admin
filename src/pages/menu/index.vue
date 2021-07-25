@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, toRefs, onBeforeMount } from 'vue'
+import { reactive, ref, toRefs, onBeforeMount, defineComponent } from 'vue'
 import { addMenuApi, deleteMenuApi, editMenuApi, getMenuListApi } from 'src/api/menu'
 
 export interface MenuForm {
@@ -47,7 +47,7 @@ export interface MenuForm {
   path: string
 }
 
-export default {
+export default defineComponent({
   setup () {
     const selected = ref(0)
     const tree = ref()
@@ -132,7 +132,7 @@ export default {
       ...toRefs(state)
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
