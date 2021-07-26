@@ -15,12 +15,12 @@
     </section>
     <div class="">
       <q-table
-          :rows="rows"
+          :rows="tableData.rows"
           :columns="columns"
           row-key="name">
         <template v-slot:body-cell-handle="props">
           <q-td :props="props">
-            <q-icon @click="handleEdit(props.row.id)" class="mr-8" color="positive" name="edit" />
+            <q-icon @click="handleEdit(props.row)" class="mr-8" color="positive" name="edit" />
             <q-icon @click="handleDelete(props.row.id)" color="red" name="delete" />
           </q-td>
         </template>
@@ -32,13 +32,13 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import { useQuasar } from 'quasar'
-import { addTagApi, getTagListApi } from 'src/api/tag'
+import { addTagApi, deleteTagApi, getTagListApi, updateTagApi } from 'src/api/tag'
 
 const columns = [
   {
-    name: 'index',
+    name: 'Id',
     label: '#',
-    field: 'index'
+    field: 'id'
   },
   {
     name: 'name',
@@ -46,34 +46,41 @@ const columns = [
     field: 'name',
     align: 'left'
   },
-  { name: 'createTime', align: 'center', label: '创建时间', field: 'createTime' },
-  { name: 'updateTime', align: 'center', label: '更新时间', field: 'updateTime' },
+  { name: 'created_at', align: 'center', label: '创建时间', field: 'created_at' },
+  { name: 'updated_at', align: 'center', label: '更新时间', field: 'updated_at' },
   { name: 'handle', label: '操作', field: 'handle' }
 ]
 
-const rows = [
-  {
-    index: 1,
-    id: 3,
-    name: 'Frozen Yogurt',
-    createTime: '2021-08-01 21:12:32',
-    updateTime: '-- --'
-  }
-]
+// let rows = [
+//   {
+//     id: 1,
+//     index: 1,
+//     name: 'Tag Name',
+//     created_at: '2021-07-25 11:46:00',
+//     updated_at: '2021-07-25 11:46:00'
+//   }
+// ]
 
-rows.forEach((row, index) => {
-  row.index = index + 1
-})
+export interface Tag {
+  id: number
+  index: number
+  name: string
+  createTime: string
+  updateTime: string
+}
 
 export default defineComponent({
   setup () {
     const search = reactive({ name: '' })
+    const tableData = reactive({ rows: [] })
     const $q = useQuasar()
     getTagList()
 
     function getTagList () {
       void getTagListApi().then(value => {
-        console.log(value)
+        tableData.rows = value.data
+        // console.log(rows)
+        // console.log(columns)
       })
     }
 
@@ -88,20 +95,44 @@ export default defineComponent({
         cancel: true,
         persistent: true
       }).onOk((data:string) => {
-        void addTagApi({ name: data }).then(value => {
-          console.log(value)
+        void addTagApi({ name: data }).then(() => {
+          getTagList()
         })
       })
     }
 
-    function handleEdit (id: number) {
-      // todo
-      console.log(id)
+    function handleEdit (tag: Tag) {
+      $q.dialog({
+        title: '新增标签',
+        message: '请输入标签的名称',
+        prompt: {
+          model: tag.name,
+          type: 'text' // optional
+        },
+        cancel: true,
+        persistent: true
+      }).onOk((data:string) => {
+        void updateTagApi({ name: data }, tag.id).then(() => {
+          getTagList()
+        })
+      })
     }
+
     function handleDelete (id: number) {
-      // todo
+      $q.dialog({
+        title: '警告',
+        message: '是否确认删除该标签？',
+        cancel: '取消',
+        ok: '确定',
+        persistent: true
+      }).onOk(() => {
+        void deleteTagApi(id).then(() => {
+          getTagList()
+        })
+      })
     }
-    return { search, columns, rows, handleDelete, handleEdit, addTag }
+
+    return { search, columns, tableData, handleDelete, handleEdit, addTag }
   }
 })
 
