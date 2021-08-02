@@ -71,6 +71,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    "comma-dangle": ["error", "never"],
     // allow async-await
     'generator-star-spacing': 'off',
     // allow paren-less arrow functions

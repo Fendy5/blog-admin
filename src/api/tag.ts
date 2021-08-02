@@ -7,7 +7,7 @@ export const addTagApi = (data: any) =>
     data
   })
 
-export const getTagListApi = (params: any) =>
+export const getTagListApi = (params?: any) =>
   api({
     url: '/api/v1/tags',
     method: 'get',
