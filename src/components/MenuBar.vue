@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="menu-bar">
     <template :key="index" v-for="(item, index) in items">
       <div class="divider" v-if="item.type === 'divider'" />
       <menu-item v-else  v-bind="item" />
@@ -44,16 +44,31 @@ export default {
           isActive: () => this.editor.isActive('strike')
         },
         {
-          icon: 'code-view',
-          title: 'Code',
-          action: () => this.editor.chain().focus().toggleCode().run(),
-          isActive: () => this.editor.isActive('code')
-        },
-        {
           icon: 'mark-pen-line',
           title: 'Highlight',
           action: () => this.editor.chain().focus().toggleHighlight().run(),
           isActive: () => this.editor.isActive('highlight')
+        },
+        {
+          type: 'divider'
+        },
+        {
+          icon: 'menu-2-line',
+          title: 'Left',
+          action: () => this.editor.chain().focus().setTextAlign('left').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'left' })
+        },
+        {
+          icon: 'menu-5-line',
+          title: 'Center',
+          action: () => this.editor.chain().focus().setTextAlign('center').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'center' })
+        },
+        {
+          icon: 'menu-3-line',
+          title: 'Right',
+          action: () => this.editor.chain().focus().setTextAlign('right').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'right' })
         },
         {
           type: 'divider'
@@ -69,6 +84,41 @@ export default {
           title: 'Heading 2',
           action: () => this.editor.chain().focus().toggleHeading({ level: 2 }).run(),
           isActive: () => this.editor.isActive('heading', { level: 2 })
+        },
+        {
+          icon: 'h-3',
+          title: 'Heading 3',
+          action: () => this.editor.chain().focus().toggleHeading({ level: 3 }).run(),
+          isActive: () => this.editor.isActive('heading', { level: 3 })
+        },
+        {
+          icon: 'h-4',
+          title: 'Heading 4',
+          action: () => this.editor.chain().focus().toggleHeading({ level: 4 }).run(),
+          isActive: () => this.editor.isActive('heading', { level: 4 })
+        },
+        {
+          icon: 'h-5',
+          title: 'Heading 5',
+          action: () => this.editor.chain().focus().toggleHeading({ level: 5 }).run(),
+          isActive: () => this.editor.isActive('heading', { level: 5 })
+        },
+        {
+          icon: 'h-6',
+          title: 'Heading 6',
+          action: () => this.editor.chain().focus().toggleHeading({ level: 6 }).run(),
+          isActive: () => this.editor.isActive('heading', { level: 6 })
+        },
+        {
+          icon: 'image-line',
+          title: 'Image',
+          action: () => {
+            const url = window.prompt('URL')
+            if (url) {
+              this.editor.chain().focus().setImage({ src: url }).run()
+            }
+          },
+          isActive: () => this.editor.isActive('image')
         },
         {
           icon: 'paragraph',
@@ -102,6 +152,12 @@ export default {
         },
         {
           type: 'divider'
+        },
+        {
+          icon: 'code-view',
+          title: 'Code',
+          action: () => this.editor.chain().focus().toggleCode().run(),
+          isActive: () => this.editor.isActive('code')
         },
         {
           icon: 'double-quotes-l',
@@ -151,10 +207,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu-bar {
+  width: 945px;
+  margin: 0 auto;
+}
 .divider {
   width: 2px;
   height: 1.25rem;
   background-color: black;
+  display: inline-block;
   margin-left: 0.5rem;
   margin-right: 0.75rem;
 }

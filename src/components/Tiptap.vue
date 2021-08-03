@@ -3,26 +3,38 @@
     <div class="editor" v-if="editor">
       <menu-bar class="editor__header" :editor="editor" />
       <div class="editor__content">
-        <div class="q-px-lg q-py-sm">
-          <q-input label="标题" color="primary" v-model="article.title"/>
-        </div>
-        <div class="q-px-lg q-py-sm">
-          <q-select
-              label="类别"
-              option-label="name"
-              v-model="article.categoryId"
-              :options="categories"
+        <q-input dense label="标题" color="primary" v-model="article.title"/>
+        <q-select
+            dense
+            label="类别"
+            option-label="name"
+            v-model="article.categoryId"
+            :options="categories"
+        />
+        <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name" color="primary" />
+        <editor-content :editor="editor" />
+        <div class="flex">
+          <q-uploader
+              url="https://image.fendy5.cn/api/v1/upload"
+              label="文章封面"
+              color="primary"
+              square
+              field-name="image"
+              flat
+              @uploaded="uploaded"
+              :form-fields="[{ name: '100%', value: true }]"
+              bordered
+              style="max-width: 300px"
+          />
+          <q-input v-model="article.desc" clearable type="textarea" color="primary" label="文章描述"
+                   placeholder="请输入文章描述"
           />
         </div>
-        <div class="q-px-lg q-py-sm">
-          <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name" color="primary" />
-        </div>
-        <editor-content :editor="editor" />
       </div>
     </div>
     <div class="text-right q-mt-md">
-      <q-btn label="Submit" type="submit" color="primary"/>
-      <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+      <q-btn label="发布" type="submit" color="primary"/>
+      <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm" />
     </div>
   </div>
 </template>
@@ -33,11 +45,13 @@ import { defineComponent, reactive, ref } from 'vue'
 
 import MenuBar from './MenuBar.vue'
 import StarterKit from '@tiptap/starter-kit'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
-import Text from '@tiptap/extension-text'
 import { getCategoriesListApi } from 'src/api/category'
 import { getTagListApi } from 'src/api/tag'
+import Image from '@tiptap/extension-image'
+import Placeholder from '@tiptap/extension-placeholder'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import lowlight from 'lowlight'
+import TextAlign from '@tiptap/extension-text-align'
 
 export interface Category {
   id: number
@@ -62,12 +76,15 @@ export default defineComponent({
     const article = reactive({
       title: '',
       tags: [],
+      desc: '',
+      cover: '',
       categoryId: ''
     })
     const editor = useEditor({
-      content: '<p>从这里开始正文 🎉</p>',
       extensions: [
-        StarterKit, Document, Paragraph, Text
+        StarterKit, CodeBlockLowlight.configure({ lowlight }), Image, Placeholder, TextAlign.configure({
+          types: ['heading', 'paragraph']
+        })
       ]
     })
     initPage()
@@ -81,7 +98,11 @@ export default defineComponent({
       })
     }
 
-    return { editor, article, categories, tags }
+    function uploaded (res: any) {
+      article.cover = JSON.parse(res.xhr.response).image_url
+    }
+
+    return { editor, article, categories, tags, uploaded }
   }
 })
 </script>
@@ -92,12 +113,14 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   //max-height: 400px;
+  width: 768px;
   height: 85vh;
   color: #0D0D0D;
   background-color: #fff;
-  border: 2px solid $primary;
-  border-radius: 0.75rem;
-
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 5%);
+  //border: 2px solid $primary;
+  border-radius: 5px;
+  margin: 0 auto;
   &__header {
     display: flex;
     align-items: center;
@@ -108,7 +131,7 @@ export default defineComponent({
   }
 
   &__content {
-    padding: 1.25rem 1rem;
+    padding: 1.5rem;
     flex: 1 1 auto;
     overflow-x: hidden;
     overflow-y: auto;
@@ -193,15 +216,30 @@ export default defineComponent({
 
 /* Basic editor styles */
 .ProseMirror {
-  p{
-    margin: 0;
+  height: 400px;
+  padding: 1.25rem 1.5rem;
+  .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
   }
   > * + * {
     //margin-top: 0.75em;
     margin: 0;
   }
-  height: 400px;
-  padding: 1.25rem 1.5rem;
+  p{
+    margin: 0;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68CEF8;
+    }
+  }
   &:focus {
     outline: none;
   }
@@ -211,14 +249,14 @@ export default defineComponent({
     padding: 0 1rem;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-  }
+  //h1,
+  //h2,
+  //h3,
+  //h4,
+  //h5,
+  //h6 {
+  //  line-height: 1.1;
+  //}
 
   code {
     background-color: rgba(#616161, 0.1);
