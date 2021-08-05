@@ -4,40 +4,45 @@
       <menu-bar :editor="editor" />
     </div>
     <div class="writing__content">
-      <q-input label="标题" class="form-item" color="primary" v-model="article.title"/>
-      <q-select class="q-px-lg" label="类别" option-label="name" v-model="article.categoryId" :options="categories"/>
-      <editor-content :editor="editor" />
-      <div class="cover q-px-lg q-py-md flex justify-between">
-        <q-uploader
-            url="https://image.fendy5.cn/api/v1/upload"
-            label="文章封面"
-            color="primary"
-            square
-            field-name="image"
-            flat
-            @uploaded="uploaded"
-            :form-fields="[{ name: '100%', value: true }]"
-            bordered
-            style="max-width: 350px;"
-        />
-        <div class="w-350">
-          <q-input v-model="article.summary" style="width: 350px;height: 90px" clearable type="textarea"
-                   autogrow color="primary" label="文章描述"
-                   placeholder="请输入文章描述"
+      <q-form @submit="submitArticle" @reset="reset" class="q-gutter-md">
+        <q-input :rules="[ val => val && val.length > 0 || '标题不能为空']" label="标题" class="form-item" color="primary" v-model="article.title"/>
+        <q-select :rules="[ val => val || '请选择类别']" class="q-px-lg" label="类别" option-label="name" v-model="article.categoryId" :options="categories"/>
+        <editor-content :editor="editor" />
+        <div class="cover q-px-lg q-py-md flex justify-between">
+          <q-uploader
+              ref="uploader"
+              url="https://image.fendy5.cn/api/v1/upload"
+              label="文章封面"
+              color="primary"
+              square
+              auto-upload
+              field-name="image"
+              flat
+              @uploaded="uploaded"
+              :form-fields="[{ name: '100%', value: true }]"
+              bordered
+              style="max-width: 350px;"
           />
-          <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name" color="primary" />
+          <div class="w-350">
+            <q-input :rules="[ val => val && val.length > 0 || '文章描述不可空']" v-model="article.summary" style="width: 350px;height: 90px" clearable type="textarea"
+                     autogrow color="primary" label="文章描述"
+                     placeholder="请输入文章描述"
+            />
+            <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name" color="primary" />
+          </div>
         </div>
-      </div>
-      <div class="main-btn form-item text-right">
-        <q-btn @click="submitArticle" label="发布" type="submit" color="primary"/>
-        <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm" />
-      </div>
+        <div class="main-btn form-item text-right">
+          <q-btn label="发布" type="submit" color="primary"/>
+          <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm" />
+        </div>
+      </q-form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import MenuBar from 'src/components/MenuBar.vue'
 // import Tiptap from 'components/Tiptap.vue'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
@@ -68,6 +73,8 @@ export default defineComponent({
   setup () {
     const categories = ref<Category[]>()
     const tags = ref<Tag[]>()
+    const uploader = ref()
+    const $router = useRouter()
 
     const article = reactive({
       title: '',
@@ -79,9 +86,9 @@ export default defineComponent({
     })
 
     const editor = useEditor({
-      content: '<p>正文从这里开始~</p>',
+      // content: '<p>正文从这里开始~</p>',
       extensions: [
-        StarterKit, CodeBlockLowlight.configure({ lowlight }), Image, Placeholder, TextAlign.configure({
+        StarterKit, CodeBlockLowlight.configure({ lowlight }), Image, Placeholder.configure({ placeholder: '正文从这里开始~' }), TextAlign.configure({
           types: ['heading', 'paragraph']
         })
       ]
@@ -99,9 +106,12 @@ export default defineComponent({
     }
 
     function submitArticle () {
-      article.content = editor.value!.getHTML()
-      void addArticleApi(article).then(value => {
-        console.log(value)
+      if (editor.value) {
+        article.content = editor.value.getHTML()
+      }
+      void addArticleApi(article).then(() => {
+        // reset()
+        void $router.push('/article')
       })
     }
 
@@ -109,7 +119,20 @@ export default defineComponent({
       article.cover = JSON.parse(res.xhr.response).image_url
     }
 
-    return { editor, article, categories, tags, uploaded, submitArticle }
+    function reset () {
+      article.title = ''
+      article.tags = []
+      article.summary = ''
+      article.cover = ''
+      article.content = ''
+      article.categoryId = ''
+      uploader.value.reset()
+      if (editor.value) {
+        editor.value.commands.clearContent()
+      }
+    }
+
+    return { editor, article, categories, tags, uploaded, submitArticle, reset, uploader }
   }
 })
 
@@ -120,7 +143,7 @@ export default defineComponent({
   &__content {
     background: #ffffff;
     width: 768px;
-    margin: 24px auto;
+    margin: 32px auto;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 5%);
     .cover {
       height: 270px;
