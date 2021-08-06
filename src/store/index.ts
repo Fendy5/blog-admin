@@ -1,11 +1,8 @@
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
-import {
-  createStore,
-  Store as VuexStore,
-  useStore as vuexUseStore
-} from 'vuex'
+import { createStore, Store as VuexStore, useStore as vuexUseStore } from 'vuex'
 
+import userModule from './modules/user'
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
 
@@ -39,6 +36,7 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore<StateInterface>({
     modules: {
       // example
+      userModule
     },
 
     // enable strict mode (adds overhead!)
