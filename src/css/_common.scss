@@ -1,0 +1,170 @@
+@import "quasar.variables";
+
+$widths: 14, 25, 30, 250;
+@each $i in $widths {
+  .wh-#{$i} {
+    width: $i+px !important;
+    height: $i+px !important;
+  }
+  .w-#{$i} {
+    width: $i+px !important;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+$paddings: 8, 12, 16, 24, 32;
+@each $i in $paddings {
+  .pt-#{$i} {
+    padding-top: $i+px;
+  }
+  .pl-#{$i} {
+    padding-left: $i+px;
+  }
+  .pr-#{$i} {
+    padding-right: $i+px;
+  }
+  .pb-#{$i} {
+    padding-bottom: $i+px;
+  }
+  .py-#{$i} {
+    padding-top: $i+px;
+    padding-bottom: $i+px;
+  }
+  .px-#{$i} {
+    padding-left: $i+px;
+    padding-right: $i+px;
+  }
+  .p-#{$i} {
+    padding: $i+px;
+  }
+  .ml-#{$i} {
+    margin-left: $i+px;
+  }
+  .mr-#{$i} {
+    margin-right: $i+px;
+  }
+  .mt-#{$i} {
+    margin-top: $i+px;
+  }
+  .mb-#{$i} {
+    margin-bottom: $i+px;
+  }
+}
+
+.shadow {
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+}
+
+.text-primary {
+  color: $primary
+}
+
+.text-secondary {
+  color: $secondary
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fx {
+  display: flex;
+  align-items: center;
+}
+
+.fx-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fx-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fx-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.relative {
+  position: relative;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text-through {
+  text-decoration: line-through;
+}
+
+.block {
+  display: block;
+}
+
+.grid-1_2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.grid-1_1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.lh-56 {
+  line-height: 56px;
+}
+
+.lh-42 {
+  line-height: 42px;
+}
+
+.lh-24 {
+  line-height: 24px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+}
