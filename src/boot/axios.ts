@@ -9,43 +9,10 @@ declare module '@vue/runtime-core' {
 }
 const api = axios.create({ baseURL: process.env.BASE_API })
 
-api.interceptors.response.use(
-  (response) => {
-    const res = response.data
-    // code-0,请求成功；code-1，未登录；code-2,服务器返回失败信息
-    if (res.code === 0) {
-      res.message && Notify.create({
-        type: 'positive',
-        message: res.message
-      })
-      return res
-    } else if (res.code === 1 || res.code === 2) {
-      Notify.create({
-        type: 'negative',
-        position: 'top',
-        message: res.message
-      })
-      if (res.code === 1) {
-        // setTimeout(() => {
-        //   UserModule.ResetToken()
-        //   location.reload()
-        // }, 1000)
-      }
-      return Promise.reject(res)
-    }
-  }, (error) => {
-    Notify.create({
-      type: 'negative',
-      position: 'top',
-      message: error.message
-    })
-    return Promise.reject(error)
-  }
-)
-
 export default boot(({
   app,
-  store
+  store,
+  router
 }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
@@ -62,6 +29,39 @@ export default boot(({
       return config
     },
     (error) => {
+      return Promise.reject(error)
+    }
+  )
+  api.interceptors.response.use(
+    (response) => {
+      const res = response.data
+      // code-0,请求成功；code-1，未登录；code-2,服务器返回失败信息
+      if (res.code === 0) {
+        res.message && Notify.create({
+          type: 'positive',
+          message: res.message
+        })
+        return res
+      } else if (res.code === 1 || res.code === 2) {
+        Notify.create({
+          type: 'negative',
+          position: 'top',
+          message: res.message
+        })
+        if (res.code === 1) {
+          setTimeout(() => {
+            void store.dispatch('userModule/resetToken')
+            void router.push('/login')
+          }, 1000)
+        }
+        return Promise.reject(res)
+      }
+    }, (error) => {
+      Notify.create({
+        type: 'negative',
+        position: 'top',
+        message: error.message
+      })
       return Promise.reject(error)
     }
   )
