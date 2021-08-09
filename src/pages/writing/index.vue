@@ -6,29 +6,36 @@
     <div class="writing__content">
       <q-form @submit="submitArticle" @reset="reset" class="q-gutter-md">
         <q-input :rules="[ val => val && val.length > 0 || '标题不能为空']" label="标题" class="form-item" color="primary" v-model="article.title"/>
-        <q-select :rules="[ val => val || '请选择类别']" class="q-px-lg" label="类别" option-label="name" v-model="article.categoryId" :options="categories"/>
+        <q-select :rules="[ val => val || '请选择类别']" class="q-px-lg" label="类别" option-label="name" option-value="id"
+                  v-model="article.category_id" :options="categories"/>
         <editor-content :editor="editor" />
         <div class="cover q-px-lg q-py-md flex justify-between">
-          <q-uploader
-              ref="uploader"
-              url="https://image.fendy5.cn/api/v1/upload"
-              label="文章封面"
-              color="primary"
-              square
-              auto-upload
-              field-name="image"
-              flat
-              @uploaded="uploaded"
-              :form-fields="[{ name: '100%', value: true }]"
-              bordered
-              style="max-width: 350px;"
-          />
+          <!--          <q-uploader-->
+          <!--              ref="uploader"-->
+          <!--              url="https://image.fendy5.cn/api/v1/upload"-->
+          <!--              label="文章封面"-->
+          <!--              color="primary"-->
+          <!--              square-->
+          <!--              auto-upload-->
+          <!--              field-name="image"-->
+          <!--              flat-->
+          <!--              @uploaded="uploaded"-->
+          <!--              :form-fields="[{ name: '100%', value: true }]"-->
+          <!--              bordered-->
+          <!--              style="max-width: 350px;"-->
+          <!--          />-->
+          <div @click="uploadImage" class="upload">
+            <q-icon v-if="!article.cover" name="upload"/>
+            <q-img v-else :src="article.cover"/>
+          </div>
           <div class="w-350">
-            <q-input :rules="[ val => val && val.length > 0 || '文章描述不可空']" v-model="article.summary" style="width: 350px;height: 90px" clearable type="textarea"
+            <q-input :rules="[ val => val && val.length > 0 || '文章描述不可空']" v-model="article.summary"
+                     style="width: 350px;height: 90px" clearable type="textarea"
                      autogrow color="primary" label="文章描述"
                      placeholder="请输入文章描述"
             />
-            <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name" color="primary" />
+            <q-checkbox v-for="i in tags" v-model="article.tags" :key="i.id" :val="i.id" :label="i.name"
+                        color="primary"/>
           </div>
         </div>
         <div class="main-btn form-item text-right">
@@ -54,35 +61,42 @@ import Placeholder from '@tiptap/extension-placeholder'
 import TextAlign from '@tiptap/extension-text-align'
 import { getCategoriesListApi } from 'src/api/category'
 import { getTagListApi } from 'src/api/tag'
-import { addArticleApi } from 'src/api/article'
+import { addArticleApi, editArticleApi, getArticleApi, uploadImageApi } from 'src/api/article'
 
 export interface Category {
   id: number
   name: string
 }
+
 export interface Tag {
   id: number
   name: string
 }
 
+export interface Article {
+  [key: string]: any
+}
+
 export default defineComponent({
   name: 'Writing',
   components: {
-    MenuBar, EditorContent
+    MenuBar,
+    EditorContent
   },
   setup () {
     const categories = ref<Category[]>()
     const tags = ref<Tag[]>()
     const uploader = ref()
     const $router = useRouter()
+    const articleId = ref<string>('')
 
-    const article = reactive({
+    const article = reactive<Article>({
       title: '',
       tags: [],
       summary: '',
       cover: '',
       content: '',
-      categoryId: ''
+      category_id: ''
     })
 
     const editor = useEditor({
@@ -103,20 +117,46 @@ export default defineComponent({
       void getTagListApi().then(value => {
         tags.value = value.data.data
       })
+      articleId.value = $router.currentRoute.value.query.articleId as string
+      if (articleId.value) {
+        void getArticleApi(articleId.value).then(value => {
+          Object.keys(article).forEach(val => {
+            article[val] = value.data[val]
+          })
+          editor.value && editor.value.commands.setContent(value.data.content)
+        })
+      }
     }
 
     function submitArticle () {
       if (editor.value) {
         article.content = editor.value.getHTML()
       }
-      void addArticleApi(article).then(() => {
-        // reset()
-        void $router.push('/article')
-      })
+      if (!articleId.value) {
+        void addArticleApi(article).then(() => {
+          void $router.push('/article')
+        })
+      } else {
+        void editArticleApi(article, articleId.value).then(() => {
+          void $router.push('/article')
+        })
+      }
     }
 
-    function uploaded (res: any) {
-      article.cover = JSON.parse(res.xhr.response).image_url
+    function uploadImage () {
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.click()
+      input.onchange = function () {
+        const file = input.files
+        if (file) {
+          const form = new FormData()
+          form.append('image', file[0])
+          void uploadImageApi(form).then((res: any) => {
+            article.cover = res.image_url
+          })
+        }
+      }
     }
 
     function reset () {
@@ -125,14 +165,23 @@ export default defineComponent({
       article.summary = ''
       article.cover = ''
       article.content = ''
-      article.categoryId = ''
+      article.category_id = ''
       uploader.value.reset()
       if (editor.value) {
         editor.value.commands.clearContent()
       }
     }
 
-    return { editor, article, categories, tags, uploaded, submitArticle, reset, uploader }
+    return {
+      editor,
+      article,
+      categories,
+      tags,
+      uploadImage,
+      submitArticle,
+      reset,
+      uploader
+    }
   }
 })
 
@@ -146,8 +195,27 @@ export default defineComponent({
     margin: 32px auto;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 5%);
     .cover {
+      margin-bottom: 60px;
       height: 270px;
       overflow: auto;
+
+      .upload {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        .q-icon {
+          cursor: pointer;
+          font-size: 72px;
+        }
+
+        .q-img {
+          cursor: pointer;
+          width: 350px;
+          height: 200px;
+        }
+      }
     }
     .main-btn {
       border-top: 1px solid #d9dadc;

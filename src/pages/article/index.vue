@@ -66,10 +66,10 @@ export default defineComponent({
         })
       })
     }
-    const editArticle = (id: string) => {
+    const editArticle = (articleId: string) => {
       void $router.push({
         path: '/writing',
-        query: { id }
+        query: { articleId }
       })
     }
     const viewArticle = (id: string) => {
