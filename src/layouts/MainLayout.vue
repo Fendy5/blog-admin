@@ -112,7 +112,7 @@ a {
 .app-content {
   position: relative;
   background: $bg;
-  padding: 24px;
+  padding: 16px;
   min-height: calc(100vh - 50px);
 }
 </style>

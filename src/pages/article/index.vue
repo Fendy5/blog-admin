@@ -1,44 +1,97 @@
 <template>
-  <div>
-    <q-card class="my-card" flat bordered>
-      <q-img
-          src="https://cdn.quasar.dev/img/parallax2.jpg"
-      />
+  <div class="row">
+    <div v-for="i in articles" :key="i.article_id" class="p-16 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="article-card" flat bordered>
+        <q-img class="cover" :src="i.cover"/>
 
-      <q-card-section>
-        <div class="text-overline text-orange-9">Overline</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-        <div class="text-caption text-grey">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </div>
-      </q-card-section>
+        <q-card-section>
+          <div class="text-grey">{{ i.updated_at }}</div>
+          <div class="text-h5 q-mt-sm q-mb-xs">
+            <span @click="viewArticle(i.article_id)" class="cursor-pointer">
+              {{ i.title }}
+            </span>
+          </div>
+          <div class="text-caption text-grey">
+            {{ i.summary }}
+          </div>
+        </q-card-section>
 
-      <q-card-actions>
-        <q-btn flat color="dark" label="Share" />
-        <q-btn flat color="primary" label="Book" />
+        <q-card-actions>
+          <q-btn @click="deleteArticle(i.article_id)" flat color="dark" label="删除"/>
+          <q-btn @click="editArticle(i.article_id)" flat color="primary" label="编辑"/>
 
-        <q-space />
-      </q-card-actions>
-    </q-card>
+          <q-space/>
+        </q-card-actions>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { deleteArticleApi, getArticleListApi } from 'src/api/article'
+import { useQuasar } from 'quasar'
+import { useRouter } from 'vue-router'
 
-export default {
+export interface Article {
+  article_id: string
+  cover: string
+  summary: string
+  title: string
+  updated_at: string
+}
+
+export default defineComponent({
   setup () {
+    const articles = ref<Article[]>([])
+    const $q = useQuasar()
+    const $router = useRouter()
+
+    const getList = () => {
+      void getArticleListApi().then(value => {
+        articles.value = value.data.data
+      })
+    }
+    getList()
+    const deleteArticle = (id: string) => {
+      $q.dialog({
+        title: '警告',
+        message: '是否确认删除？',
+        cancel: '取消',
+        ok: '确定',
+        persistent: true
+      }).onOk(() => {
+        void deleteArticleApi(id).then(() => {
+          getList()
+        })
+      })
+    }
+    const editArticle = (id: string) => {
+      void $router.push({
+        path: '/writing',
+        query: { id }
+      })
+    }
+    const viewArticle = (id: string) => {
+      window.location.href = `https://www.fendy5.cn/s/${id}`
+    }
     return {
-      expanded: ref(false),
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      articles,
+      deleteArticle,
+      editArticle,
+      viewArticle
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
-.my-card {
-  width: 100%;
-  max-width: 350px;
+.article-card {
+  height: 100%;
+  background: #ffffff;
+}
+
+.cover {
+  height: 175px;
 }
 </style>
