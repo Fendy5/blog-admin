@@ -17,9 +17,8 @@
         </q-card-section>
 
         <q-card-actions>
-          <q-btn @click="deleteArticle(i.article_id)" flat color="dark" label="删除"/>
           <q-btn @click="editArticle(i.article_id)" flat color="primary" label="编辑"/>
-
+          <q-btn @click="deleteArticle(i.article_id)" flat color="negative" label="删除"/>
           <q-space/>
         </q-card-actions>
       </div>
