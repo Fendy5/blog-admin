@@ -51,9 +51,10 @@ export default defineComponent({
     const handleLogin = () => {
       loading.value = true
       void loginApi(loginForm).then((value: any) => {
-        loading.value = false
         void store.dispatch('userModule/setTokenAction', value.data.token)
         void $router.push('/')
+      }).finally(() => {
+        loading.value = false
       })
     }
     return {

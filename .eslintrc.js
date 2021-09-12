@@ -71,7 +71,6 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    "comma-dangle": ["error", "never"],
     // allow async-await
     'generator-star-spacing': 'off',
     // allow paren-less arrow functions
@@ -79,11 +78,8 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'multiline-ternary': 'off',
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/no-unsafe-return': 'off',
+
     'import/first': 'off',
-    'import/named': 'error',
     'import/namespace': 'error',
     'import/default': 'error',
     'import/export': 'error',
@@ -96,11 +92,16 @@ module.exports = {
     quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-unsafe-call': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    'camelcase': 'off',
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-  }
+
+    // user
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'camelcase': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+  },
 }
