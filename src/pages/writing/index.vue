@@ -142,7 +142,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      // @ts-ignore
+      // @ts-ignore disable-eslint
       new FroalaEditor('#editor', options)
     })
 
