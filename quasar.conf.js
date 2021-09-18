@@ -92,13 +92,13 @@ module.exports = configure(function (ctx) {
           target: 'http://127.0.0.1:7036',
           changeOrigin: true,
           pathRewrite: {
-            '^/dev-api': ''
-          }
-        }
+            '^/dev-api': '',
+          },
+        },
       },
       https: false,
-      port: 8080,
-      open: true // opens browser window automatically
+      port: 9432,
+      open: true, // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

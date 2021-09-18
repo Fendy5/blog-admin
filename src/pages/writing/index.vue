@@ -32,7 +32,7 @@
                  v-model="article.title"/>
         <q-select :rules="[ val => val || '请选择类别']" class="q-px-lg" label="类别" option-label="name" option-value="id"
                   v-model="article.category_id" :options="categories"/>
-        <textarea id="editor" v-model="article.content" autofocus></textarea>
+        <textarea id="editor" autofocus></textarea>
         <div class="cover q-px-lg q-py-md flex justify-between">
           <div class="upload">
             <q-icon @click="uploadImage" v-if="!article.cover" name="upload"/>
@@ -124,28 +124,31 @@ export default defineComponent({
       }
     }
 
+    const options = {
+      language: 'zh_cn',
+      quickInsertEnabled: false,
+      attribution: false,
+      imageUploadMethod: 'POST',
+      imageMaxSize: 2 * 1024 * 1024,
+      imageUploadParam: 'image',
+      imageUploadURL: 'https://image.fendy5.cn',
+      videoAllowedTypes: ['mp4', 'flv'],
+      videoUpload: true,
+      videoUploadMethod: 'POST',
+      videoUploadParam: 'video',
+      videoUploadURL: 'https://image.fendy5.cn',
+      videoResponsive: true,
+      events: {}
+    }
+
     onMounted(() => {
-      /* eslint-disable */
-      new FroalaEditor('#editor', {
-        language: 'zh_cn',
-        quickInsertEnabled: false,
-        attribution: false,
-        imageUploadMethod: 'POST',
-        imageMaxSize: 2 * 1024 * 1024,
-        imageUploadParam: 'image',
-        imageUploadURL: 'https://image.fendy5.cn',
-        videoAllowedTypes: ['mp4', 'flv'],
-        videoUpload: true,
-        videoUploadMethod: 'POST',
-        videoUploadParam: 'video',
-        videoUploadURL: 'https://image.fendy5.cn',
-        videoResponsive: true,
-        events: {}
-      })
+      // @ts-ignore
+      new FroalaEditor('#editor', options)
     })
 
     function submitArticle () {
-      // const content = document.getElementById('editor') as any
+      const content = document.getElementById('editor') as any
+      article.content = content.value
       if (!articleId.value) {
         void addArticleApi(article).then(() => {
           void $router.push('/article')
@@ -288,4 +291,8 @@ export default defineComponent({
 
 <style lang="scss">
 @import "src/css/quasar.variables";
+
+a[href="https://www.froala.com/wysiwyg-editor?k=u"] {
+  display: none !important;
+}
 </style>
