@@ -35,7 +35,7 @@ export const getArticleApi = (id: string) =>
 
 export const uploadImageApi = (data: any) =>
   api({
-    url: 'https://image.fendy5.cn/api/v1/upload?50%=true',
+    url: 'https://image.fendy5.cn/api/v1/upload?100%=true',
     method: 'post',
     data
   })
