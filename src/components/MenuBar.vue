@@ -19,7 +19,7 @@ export default {
     editor: {
       type: Object,
       required: true,
-    },
+    }
   },
 
   data () {
@@ -185,7 +185,7 @@ export default {
             .focus()
             .clearNodes()
             .unsetAllMarks()
-            .run(),
+            .run()
         },
         {
           type: 'divider',
@@ -200,9 +200,9 @@ export default {
           title: 'Redo',
           action: () => this.editor.chain().focus().redo().run(),
         },
-      ],
+      ]
     }
-  },
+  }
 }
 </script>
 
