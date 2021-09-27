@@ -1,38 +1,15 @@
 <template>
   <div class="writing">
     <div class="writing__content">
-      <q-dialog v-model="prompt" persistent>
-        <q-card style="min-width: 720px;height:80%">
-          <q-card-section>
-            <div class="text-h6">截取图片</div>
-          </q-card-section>
-          <q-card-section class="q-pt-none">
-            <q-form class="q-gutter-md">
-              <div style="height:500px">
-                <vue-cropper autoCrop :img="originImage" ref="cropper" centerBox fixed :fixedNumber="[2,1]"/>
-              </div>
-              <div class="text-right">
-                <q-btn @click="getScreenshot" label="确定" color="primary"/>
-                <q-btn label="取消" type="reset" color="primary" v-close-popup flat class="q-ml-sm"/>
-              </div>
-            </q-form>
-          </q-card-section>
-        </q-card>
-        <!--        <div style="width:100%;height:500px">-->
-        <!--          <vue-cropper autoCrop img="https://shnhz.github.io/shn-ui/img/Koala.jpg" ref="cropper" centerBox fixed :fixedNumber="[2,1]"/>-->
-        <!--          <q-card-section class="q-pt-none">-->
-        <!--            <q-btn label="确定"  @click="prompt=false" color="primary" />-->
-        <!--            <q-btn label="取消" type="reset" color="primary" v-close-popup flat class="q-ml-sm" />-->
-        <!--          </q-card-section>-->
-        <!--        </div>-->
-      </q-dialog>
-      <!--      <vue-cropper ref="cropper" src="https://image.fendy5.cn/s/LNSrEIFMnPR7kwVt.jpg" />-->
+      <div v-if="editor">
+        <menu-bar :editor="editor"/>
+      </div>
       <q-form @submit="submitArticle" @reset="reset" class="q-gutter-md">
         <q-input :rules="[ val => val && val.length > 0 || '标题不能为空']" label="标题" class="form-item" color="primary"
                  v-model="article.title"/>
         <q-select :rules="[ val => val || '请选择类别']" class="q-px-lg" label="类别" option-label="name" option-value="id"
                   v-model="article.category_id" :options="categories"/>
-        <textarea id="editor" autofocus></textarea>
+        <editor-content v-highlight :editor="editor"/>
         <div class="cover q-px-lg q-py-md flex justify-between">
           <div class="upload">
             <q-icon @click="uploadImage" v-if="!article.cover" name="upload"/>
@@ -50,22 +27,47 @@
         </div>
         <div class="main-btn form-item text-right">
           <q-btn label="发布" type="submit" color="primary"/>
-          <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm" />
+          <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm"/>
         </div>
       </q-form>
+      <q-dialog v-model="prompt" persistent>
+        <q-card style="min-width: 720px;height:80%">
+          <q-card-section>
+            <div class="text-h6">截取图片</div>
+          </q-card-section>
+          <q-card-section class="q-pt-none">
+            <q-form class="q-gutter-md">
+              <div style="height:500px">
+                <vue-cropper autoCrop :img="originImage" ref="cropper" centerBox fixed :fixedNumber="[2,1]"/>
+              </div>
+              <div class="text-right">
+                <q-btn @click="getScreenshot" label="确定" color="primary"/>
+                <q-btn label="取消" type="reset" color="primary" v-close-popup flat class="q-ml-sm"/>
+              </div>
+            </q-form>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { getCategoriesListApi } from 'src/api/category'
 import { getTagListApi } from 'src/api/tag'
-// import  FroalaEditor from 'src/types'
 import { addArticleApi, editArticleApi, getArticleApi, uploadImageApi } from 'src/api/article'
+import highlight from 'src/directive/highlight'
+
+import { EditorContent, useEditor } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+import MenuBar from 'src/components/MenuBar.vue'
+import Image from '@tiptap/extension-image'
+import Placeholder from '@tiptap/extension-placeholder'
+import TextAlign from '@tiptap/extension-text-align'
 
 export interface Category {
   id: number
@@ -83,7 +85,12 @@ export interface Article {
 
 export default defineComponent({
   name: 'Writing',
-  components: { VueCropper },
+  directives: { highlight },
+  components: {
+    VueCropper,
+    EditorContent,
+    MenuBar
+  },
   setup () {
     const categories = ref<Category[]>()
     const tags = ref<Tag[]>()
@@ -91,6 +98,13 @@ export default defineComponent({
     const prompt = ref(false), cropper = ref(), originImage = ref()
     const $router = useRouter()
     const articleId = ref<string>('')
+
+    const editor = useEditor({
+      // content: '<p>I’m running tiptap with Vue.js. 🎉</p>',
+      extensions: [
+        StarterKit, Image, Placeholder.configure({ placeholder: '正文从这里开始~' }), TextAlign.configure({ types: ['heading', 'paragraph'] })
+      ]
+    })
 
     const article = reactive<Article>({
       title: '',
@@ -100,6 +114,14 @@ export default defineComponent({
       content: '',
       category_id: ''
     })
+    // const editor = useEditor({
+    //   content: '<p>正文从这里开始~</p>',
+    //   extensions: [
+    //     StarterKit, CodeBlockLowlight.configure({ lowlight }), Image, Placeholder.configure({ placeholder: '正文从这里开始~' }), TextAlign.configure({
+    //       types: ['heading', 'paragraph']
+    //     })
+    //   ]
+    // })
 
     initPage()
 
@@ -116,39 +138,17 @@ export default defineComponent({
           Object.keys(article).forEach(val => {
             article[val] = value.data[val]
           })
-          const content = document.getElementsByClassName('fr-view')[0]
+          const content = document.getElementsByClassName('ProseMirror')[0]
           content.innerHTML = value.data.content
-          // const content = document.getElementById('editor') as any
-          // content.value = value.data.content
         })
       }
     }
 
-    const options = {
-      language: 'zh_cn',
-      quickInsertEnabled: false,
-      attribution: false,
-      imageUploadMethod: 'POST',
-      imageMaxSize: 2 * 1024 * 1024,
-      imageUploadParam: 'image',
-      imageUploadURL: 'https://image.fendy5.cn',
-      videoAllowedTypes: ['mp4', 'flv'],
-      videoUpload: true,
-      videoUploadMethod: 'POST',
-      videoUploadParam: 'video',
-      videoUploadURL: 'https://image.fendy5.cn',
-      videoResponsive: true,
-      events: {}
-    }
-
-    onMounted(() => {
-      // @ts-ignore disable-eslint
-      new FroalaEditor('#editor', options)
-    })
-
     function submitArticle () {
-      const content = document.getElementById('editor') as any
-      article.content = content.value
+      if (editor.value) {
+        article.content = editor.value.getHTML()
+      }
+      console.log(article.content)
       if (!articleId.value) {
         void addArticleApi(article).then(() => {
           void $router.push('/article')
@@ -199,6 +199,7 @@ export default defineComponent({
     }
 
     return {
+      editor,
       originImage,
       getScreenshot,
       prompt,
@@ -291,8 +292,118 @@ export default defineComponent({
 
 <style lang="scss">
 @import "src/css/quasar.variables";
+/* Basic editor styles */
+.ProseMirror {
+  //height: 400px;
+  min-height: 350px;
+  border-bottom: 1px solid #eeeeee;
+  padding: 1.25rem 1.5rem;
 
-a[href="https://www.froala.com/wysiwyg-editor?k=u"] {
-  display: none !important;
+  > * + * {
+    //margin-top: 0.75em;
+    margin: 0;
+  }
+
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68CEF8;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  //h1,
+  //h2,
+  //h3,
+  //h4,
+  //h5,
+  //h6 {
+  //  line-height: 1.1;
+  //}
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  pre {
+    background: #0D0D0D;
+    color: #FFF;
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  mark {
+    background-color: #FAF594;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0D0D0D, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    margin: 2rem 0;
+  }
+
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+
+      > label {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .ProseMirror-focused {
+    border: none !important;
+  }
 }
 </style>

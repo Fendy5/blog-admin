@@ -267,7 +267,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.12.0", "@babel/parser@^7.13.9", "@babel/parser@^7.15.0", "@babel/parser@^7.15.4", "@babel/parser@^7.15.5":
+"@babel/parser@^7.12.0", "@babel/parser@^7.13.9", "@babel/parser@^7.15.4", "@babel/parser@^7.15.5":
   version "7.15.5"
   resolved "https://registry.nlark.com/@babel/parser/download/@babel/parser-7.15.5.tgz?cache=0&sync_timestamp=1630746008183&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.15.5.tgz#d33a58ca69facc05b26adfe4abebfed56c1c2dac"
   integrity sha1-0zpYymn6zAWyat/kq+v+1WwcLaw=
@@ -942,7 +942,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/types@^7.12.0", "@babel/types@^7.13.0", "@babel/types@^7.15.0", "@babel/types@^7.15.4", "@babel/types@^7.4.4":
+"@babel/types@^7.12.0", "@babel/types@^7.13.0", "@babel/types@^7.15.4", "@babel/types@^7.4.4":
   version "7.15.4"
   resolved "https://registry.nlark.com/@babel/types/download/@babel/types-7.15.4.tgz?cache=0&sync_timestamp=1630618915456&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.15.4.tgz#74eeb86dbd6748d2741396557b9860e57fce0a0d"
   integrity sha1-dO64bb1nSNJ0E5ZVe5hg5X/OCg0=
@@ -1023,7 +1023,7 @@
 
 "@popperjs/core@^2.8.3":
   version "2.10.1"
-  resolved "https://registry.nlark.com/@popperjs/core/download/@popperjs/core-2.10.1.tgz#728ecd95ab207aab8a9a4e421f0422db329232be"
+  resolved "https://registry.nlark.com/@popperjs/core/download/@popperjs/core-2.10.1.tgz?cache=0&sync_timestamp=1630646750615&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40popperjs%2Fcore%2Fdownload%2F%40popperjs%2Fcore-2.10.1.tgz#728ecd95ab207aab8a9a4e421f0422db329232be"
   integrity sha1-co7NlasgequKmk5CHwQi2zKSMr4=
 
 "@positron/stack-trace@1.0.0":
@@ -1163,10 +1163,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tiptap/core@^2.0.0-beta.103":
-  version "2.0.0-beta.103"
-  resolved "https://registry.nlark.com/@tiptap/core/download/@tiptap/core-2.0.0-beta.103.tgz#f88f0217a26a3dc5413f44ffff246c4692709afb"
-  integrity sha1-+I8CF6JqPcVBP0T//yRsRpJwmvs=
+"@tiptap/core@^2.0.0-beta.112":
+  version "2.0.0-beta.112"
+  resolved "https://registry.npmmirror.com/@tiptap/core/download/@tiptap/core-2.0.0-beta.112.tgz#7afea7d63f2ec7d9ae498eea3176d3ae60ffd393"
+  integrity sha1-ev6n1j8ux9muSY7qMXbTrmD/05M=
   dependencies:
     "@types/prosemirror-commands" "^1.0.4"
     "@types/prosemirror-inputrules" "^1.0.4"
@@ -1175,15 +1175,15 @@
     "@types/prosemirror-schema-list" "^1.0.3"
     "@types/prosemirror-state" "^1.2.7"
     "@types/prosemirror-transform" "^1.1.4"
-    "@types/prosemirror-view" "^1.19.0"
+    "@types/prosemirror-view" "^1.19.1"
     prosemirror-commands "^1.1.10"
     prosemirror-inputrules "^1.1.3"
     prosemirror-keymap "^1.1.3"
     prosemirror-model "^1.14.3"
-    prosemirror-schema-list "^1.1.5"
+    prosemirror-schema-list "^1.1.6"
     prosemirror-state "^1.3.4"
     prosemirror-transform "^1.3.2"
-    prosemirror-view "^1.20.0"
+    prosemirror-view "^1.20.1"
 
 "@tiptap/extension-blockquote@^2.0.0-beta.15":
   version "2.0.0-beta.15"
@@ -1197,13 +1197,13 @@
   resolved "https://registry.nlark.com/@tiptap/extension-bold/download/@tiptap/extension-bold-2.0.0-beta.15.tgz#cf9ddb3fc316be9707753ad4e497bfb8a3ebb0c2"
   integrity sha1-z53bP8MWvpcHdTrU5Je/uKPrsMI=
 
-"@tiptap/extension-bubble-menu@^2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.nlark.com/@tiptap/extension-bubble-menu/download/@tiptap/extension-bubble-menu-2.0.0-beta.32.tgz#5f9358c775760bac057c444c1a52a3bfe54358e5"
-  integrity sha1-X5NYx3V2C6wFfERMGlKjv+VDWOU=
+"@tiptap/extension-bubble-menu@^2.0.0-beta.35":
+  version "2.0.0-beta.35"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-bubble-menu/download/@tiptap/extension-bubble-menu-2.0.0-beta.35.tgz#11ea379b9e9044c96ddbcdc457155b6fd4ee81e7"
+  integrity sha1-Eeo3m56QRMlt283EVxVbb9Tugec=
   dependencies:
     prosemirror-state "^1.3.4"
-    prosemirror-view "^1.20.0"
+    prosemirror-view "^1.20.1"
     tippy.js "^6.3.1"
 
 "@tiptap/extension-bullet-list@^2.0.0-beta.15":
@@ -1232,6 +1232,13 @@
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
+"@tiptap/extension-code-block@^2.0.0-beta.18":
+  version "2.0.0-beta.18"
+  resolved "https://registry.nlark.com/@tiptap/extension-code-block/download/@tiptap/extension-code-block-2.0.0-beta.18.tgz#3b43730cfca1ba26171530951b3cc324a500cb11"
+  integrity sha1-O0NzDPyhuiYXFTCVGzzDJKUAyxE=
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
 "@tiptap/extension-code@^2.0.0-beta.16":
   version "2.0.0-beta.16"
   resolved "https://registry.nlark.com/@tiptap/extension-code/download/@tiptap/extension-code-2.0.0-beta.16.tgz#b258ff90ebe703a4d36ff0c650e6b2cab634028d"
@@ -1250,27 +1257,27 @@
     "@types/prosemirror-dropcursor" "^1.0.3"
     prosemirror-dropcursor "^1.3.5"
 
-"@tiptap/extension-floating-menu@^2.0.0-beta.26":
-  version "2.0.0-beta.26"
-  resolved "https://registry.nlark.com/@tiptap/extension-floating-menu/download/@tiptap/extension-floating-menu-2.0.0-beta.26.tgz#949672fd16820b2cd695d93189814d9f9f6e9468"
-  integrity sha1-lJZy/RaCCyzWldkxiYFNn59ulGg=
+"@tiptap/extension-floating-menu@^2.0.0-beta.29":
+  version "2.0.0-beta.29"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-floating-menu/download/@tiptap/extension-floating-menu-2.0.0-beta.29.tgz#a3d27a859be0f21334a37f9213bcd49e2f80241c"
+  integrity sha1-o9J6hZvg8hM0o3+SE7zUni+AJBw=
   dependencies:
     prosemirror-state "^1.3.4"
-    prosemirror-view "^1.20.0"
+    prosemirror-view "^1.20.1"
     tippy.js "^6.3.1"
 
-"@tiptap/extension-gapcursor@^2.0.0-beta.19":
-  version "2.0.0-beta.19"
-  resolved "https://registry.nlark.com/@tiptap/extension-gapcursor/download/@tiptap/extension-gapcursor-2.0.0-beta.19.tgz#6d826c240496b1a77808999d51b8917adb372cc5"
-  integrity sha1-bYJsJASWsad4CJmdUbiRets3LMU=
+"@tiptap/extension-gapcursor@^2.0.0-beta.20":
+  version "2.0.0-beta.20"
+  resolved "https://registry.nlark.com/@tiptap/extension-gapcursor/download/@tiptap/extension-gapcursor-2.0.0-beta.20.tgz#77df6b0c4adca016e2d1a2c90e94841f812aa717"
+  integrity sha1-d99rDErcoBbi0aLJDpSEH4Eqpxc=
   dependencies:
     "@types/prosemirror-gapcursor" "^1.0.4"
-    prosemirror-gapcursor "^1.1.5"
+    prosemirror-gapcursor "^1.2.0"
 
-"@tiptap/extension-hard-break@^2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.nlark.com/@tiptap/extension-hard-break/download/@tiptap/extension-hard-break-2.0.0-beta.16.tgz#1a55e901ce2deaaeaf53d77d254371955fe8fd99"
-  integrity sha1-GlXpAc4t6q6vU9d9JUNxlV/o/Zk=
+"@tiptap/extension-hard-break@^2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.npmmirror.com/@tiptap/extension-hard-break/download/@tiptap/extension-hard-break-2.0.0-beta.17.tgz#99a944dfea3774529157f370294811079981f976"
+  integrity sha1-malE3+o3dFKRV/NwKUgRB5mB+XY=
 
 "@tiptap/extension-heading@^2.0.0-beta.15":
   version "2.0.0-beta.15"
@@ -1309,10 +1316,10 @@
   resolved "https://registry.nlark.com/@tiptap/extension-list-item/download/@tiptap/extension-list-item-2.0.0-beta.14.tgz#65a9ff9daa11bc9ca8bc2989a891abe68081cfbd"
   integrity sha1-Zan/naoRvJyovCmJqJGr5oCBz70=
 
-"@tiptap/extension-ordered-list@^2.0.0-beta.15":
-  version "2.0.0-beta.15"
-  resolved "https://registry.nlark.com/@tiptap/extension-ordered-list/download/@tiptap/extension-ordered-list-2.0.0-beta.15.tgz#5645efe300489d5ea2ed7f98eaa84fbdb6951af8"
-  integrity sha1-VkXv4wBInV6i7X+Y6qhPvbaVGvg=
+"@tiptap/extension-ordered-list@^2.0.0-beta.16":
+  version "2.0.0-beta.16"
+  resolved "https://registry.nlark.com/@tiptap/extension-ordered-list/download/@tiptap/extension-ordered-list-2.0.0-beta.16.tgz#3ef25a8dd8ddbd2b1aa5ce89d5a2e5a3ecafcf4e"
+  integrity sha1-PvJajdjdvSsapc6J1aLlo+yvz04=
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
@@ -1345,41 +1352,40 @@
   resolved "https://registry.nlark.com/@tiptap/extension-text/download/@tiptap/extension-text-2.0.0-beta.13.tgz#da0af8d9a3f149d20076e15d88c6af21fb6d940f"
   integrity sha1-2gr42aPxSdIAduFdiMavIfttlA8=
 
-"@tiptap/starter-kit@^2.0.0-beta.88":
-  version "2.0.0-beta.102"
-  resolved "https://registry.nlark.com/@tiptap/starter-kit/download/@tiptap/starter-kit-2.0.0-beta.102.tgz#85b5ef30401d1eee0d63089854e39bedfb249f7f"
-  integrity sha1-hbXvMEAdHu4NYwiYVOOb7fskn38=
+"@tiptap/starter-kit@^2.0.0-beta.111":
+  version "2.0.0-beta.111"
+  resolved "https://registry.npmmirror.com/@tiptap/starter-kit/download/@tiptap/starter-kit-2.0.0-beta.111.tgz#226f8ff9590c4d424f8d94265dfe0005725ef35b"
+  integrity sha1-Im+P+VkMTUJPjZQmXf4ABXJe81s=
   dependencies:
-    "@tiptap/core" "^2.0.0-beta.103"
+    "@tiptap/core" "^2.0.0-beta.112"
     "@tiptap/extension-blockquote" "^2.0.0-beta.15"
     "@tiptap/extension-bold" "^2.0.0-beta.15"
     "@tiptap/extension-bullet-list" "^2.0.0-beta.15"
     "@tiptap/extension-code" "^2.0.0-beta.16"
-    "@tiptap/extension-code-block" "^2.0.0-beta.17"
+    "@tiptap/extension-code-block" "^2.0.0-beta.18"
     "@tiptap/extension-document" "^2.0.0-beta.13"
     "@tiptap/extension-dropcursor" "^2.0.0-beta.19"
-    "@tiptap/extension-gapcursor" "^2.0.0-beta.19"
-    "@tiptap/extension-hard-break" "^2.0.0-beta.16"
+    "@tiptap/extension-gapcursor" "^2.0.0-beta.20"
+    "@tiptap/extension-hard-break" "^2.0.0-beta.17"
     "@tiptap/extension-heading" "^2.0.0-beta.15"
     "@tiptap/extension-history" "^2.0.0-beta.16"
     "@tiptap/extension-horizontal-rule" "^2.0.0-beta.19"
     "@tiptap/extension-italic" "^2.0.0-beta.15"
     "@tiptap/extension-list-item" "^2.0.0-beta.14"
-    "@tiptap/extension-ordered-list" "^2.0.0-beta.15"
+    "@tiptap/extension-ordered-list" "^2.0.0-beta.16"
     "@tiptap/extension-paragraph" "^2.0.0-beta.17"
     "@tiptap/extension-strike" "^2.0.0-beta.17"
     "@tiptap/extension-text" "^2.0.0-beta.13"
 
-"@tiptap/vue-3@^2.0.0-beta.48":
-  version "2.0.0-beta.57"
-  resolved "https://registry.nlark.com/@tiptap/vue-3/download/@tiptap/vue-3-2.0.0-beta.57.tgz#12eda6d8b20dde5b72039af39566a563b74f9a99"
-  integrity sha1-Eu2m2LIN3ltyA5rzlWalY7dPmpk=
+"@tiptap/vue-3@^2.0.0-beta.63":
+  version "2.0.0-beta.63"
+  resolved "https://registry.npmmirror.com/@tiptap/vue-3/download/@tiptap/vue-3-2.0.0-beta.63.tgz#d6f85266a1482999262cfc020f6111943eb114ac"
+  integrity sha1-1vhSZqFIKZkmLPwCD2ERlD6xFKw=
   dependencies:
-    "@tiptap/extension-bubble-menu" "^2.0.0-beta.32"
-    "@tiptap/extension-floating-menu" "^2.0.0-beta.26"
+    "@tiptap/extension-bubble-menu" "^2.0.0-beta.35"
+    "@tiptap/extension-floating-menu" "^2.0.0-beta.29"
     prosemirror-state "^1.3.4"
-    prosemirror-view "^1.20.0"
-    vue "^3.0.0"
+    prosemirror-view "^1.20.1"
 
 "@trysound/sax@0.1.1":
   version "0.1.1"
@@ -1618,10 +1624,10 @@
   dependencies:
     "@types/prosemirror-model" "*"
 
-"@types/prosemirror-view@*", "@types/prosemirror-view@^1.19.0":
-  version "1.19.0"
-  resolved "https://registry.nlark.com/@types/prosemirror-view/download/@types/prosemirror-view-1.19.0.tgz#35320b6875ae7c750bce799cccf735e5da91af7a"
-  integrity sha1-NTILaHWufHULznmczPc15dqRr3o=
+"@types/prosemirror-view@*", "@types/prosemirror-view@^1.19.1":
+  version "1.19.1"
+  resolved "https://registry.nlark.com/@types/prosemirror-view/download/@types/prosemirror-view-1.19.1.tgz#f12309ef07dfb701d20c2e4d0292d42ba34a081b"
+  integrity sha1-8SMJ7wfftwHSDC5NApLUK6NKCBs=
   dependencies:
     "@types/prosemirror-model" "*"
     "@types/prosemirror-state" "*"
@@ -1796,17 +1802,6 @@
     estree-walker "^2.0.1"
     source-map "^0.6.1"
 
-"@vue/compiler-core@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/compiler-core/download/@vue/compiler-core-3.2.9.tgz?cache=0&sync_timestamp=1630881500647&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-core%2Fdownload%2F%40vue%2Fcompiler-core-3.2.9.tgz#874d04d3e4de98f3a60769db7fa47e041bfca490"
-  integrity sha1-h00E0+TemPOmB2nbf6R+BBv8pJA=
-  dependencies:
-    "@babel/parser" "^7.15.0"
-    "@babel/types" "^7.15.0"
-    "@vue/shared" "3.2.9"
-    estree-walker "^2.0.2"
-    source-map "^0.6.1"
-
 "@vue/compiler-dom@3.2.4":
   version "3.2.4"
   resolved "https://registry.nlark.com/@vue/compiler-dom/download/@vue/compiler-dom-3.2.4.tgz?cache=0&sync_timestamp=1630881500802&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-dom%2Fdownload%2F%40vue%2Fcompiler-dom-3.2.4.tgz#3a43de243eba127abbe57e796a0b969d2df78c08"
@@ -1814,14 +1809,6 @@
   dependencies:
     "@vue/compiler-core" "3.2.4"
     "@vue/shared" "3.2.4"
-
-"@vue/compiler-dom@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/compiler-dom/download/@vue/compiler-dom-3.2.9.tgz?cache=0&sync_timestamp=1630881500802&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-dom%2Fdownload%2F%40vue%2Fcompiler-dom-3.2.9.tgz#e42b2bc285366224a1738f7ed6648d4260cbbbef"
-  integrity sha1-5CsrwoU2YiShc49+1mSNQmDLu+8=
-  dependencies:
-    "@vue/compiler-core" "3.2.9"
-    "@vue/shared" "3.2.9"
 
 "@vue/compiler-sfc@3.2.4":
   version "3.2.4"
@@ -1866,13 +1853,6 @@
   dependencies:
     "@vue/shared" "3.2.4"
 
-"@vue/reactivity@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/reactivity/download/@vue/reactivity-3.2.9.tgz?cache=0&sync_timestamp=1630881501334&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Freactivity%2Fdownload%2F%40vue%2Freactivity-3.2.9.tgz#f4ec61519f4779224d98a23ac07b481d95687cae"
-  integrity sha1-9OxhUZ9HeSJNmKI6wHtIHZVofK4=
-  dependencies:
-    "@vue/shared" "3.2.9"
-
 "@vue/runtime-core@3.2.4":
   version "3.2.4"
   resolved "https://registry.nlark.com/@vue/runtime-core/download/@vue/runtime-core-3.2.4.tgz?cache=0&sync_timestamp=1630881501595&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-core%2Fdownload%2F%40vue%2Fruntime-core-3.2.4.tgz#da5dde3dc1e48df99dd31ea9a972f5c02acdc3f5"
@@ -1881,14 +1861,6 @@
     "@vue/reactivity" "3.2.4"
     "@vue/shared" "3.2.4"
 
-"@vue/runtime-core@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/runtime-core/download/@vue/runtime-core-3.2.9.tgz?cache=0&sync_timestamp=1630881501595&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-core%2Fdownload%2F%40vue%2Fruntime-core-3.2.9.tgz#32854c9d9853aa2075fcecfc762b5f033a6bae1e"
-  integrity sha1-MoVMnZhTqiB1/Oz8ditfAzprrh4=
-  dependencies:
-    "@vue/reactivity" "3.2.9"
-    "@vue/shared" "3.2.9"
-
 "@vue/runtime-dom@3.2.4":
   version "3.2.4"
   resolved "https://registry.nlark.com/@vue/runtime-dom/download/@vue/runtime-dom-3.2.4.tgz?cache=0&sync_timestamp=1630881501742&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-dom%2Fdownload%2F%40vue%2Fruntime-dom-3.2.4.tgz#1025595f2ae99a12fe0e1e6bce8df6761efec24b"
@@ -1896,15 +1868,6 @@
   dependencies:
     "@vue/runtime-core" "3.2.4"
     "@vue/shared" "3.2.4"
-    csstype "^2.6.8"
-
-"@vue/runtime-dom@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/runtime-dom/download/@vue/runtime-dom-3.2.9.tgz?cache=0&sync_timestamp=1630881501742&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-dom%2Fdownload%2F%40vue%2Fruntime-dom-3.2.9.tgz#397572a142db2772fb4b7f0a2bc06b5486e5db81"
-  integrity sha1-OXVyoULbJ3L7S38KK8BrVIbl24E=
-  dependencies:
-    "@vue/runtime-core" "3.2.9"
-    "@vue/shared" "3.2.9"
     csstype "^2.6.8"
 
 "@vue/server-renderer@3.2.4":
@@ -1919,11 +1882,6 @@
   version "3.2.4"
   resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.2.4.tgz?cache=0&sync_timestamp=1630881474290&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.4.tgz#ba2a09527afff27b28d08f921b4a597e9504ca7a"
   integrity sha1-uioJUnr/8nso0I+SG0pZfpUEyno=
-
-"@vue/shared@3.2.9":
-  version "3.2.9"
-  resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.2.9.tgz?cache=0&sync_timestamp=1630881474290&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.9.tgz#44e44dbd82819997f192fb7dbdb90af5715dbf52"
-  integrity sha1-RORNvYKBmZfxkvt9vbkK9XFdv1I=
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -3620,7 +3578,7 @@ estraverse@^5.1.0, estraverse@^5.2.0:
   resolved "https://registry.nlark.com/estraverse/download/estraverse-5.2.0.tgz?cache=0&sync_timestamp=1622604531280&other_urls=https%3A%2F%2Fregistry.nlark.com%2Festraverse%2Fdownload%2Festraverse-5.2.0.tgz#307df42547e6cc7324d3cf03c155d5cdb8c53880"
   integrity sha1-MH30JUfmzHMk088DwVXVzbjFOIA=
 
-estree-walker@^2.0.1, estree-walker@^2.0.2:
+estree-walker@^2.0.1:
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/estree-walker/download/estree-walker-2.0.2.tgz?cache=0&sync_timestamp=1611956983677&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Festree-walker%2Fdownload%2Festree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
   integrity sha1-UvAQF4wqTBF6d1fP6UKtt9LaTKw=
@@ -4167,6 +4125,11 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/he/download/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
+
+highlight.js@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.nlark.com/highlight.js/download/highlight.js-11.2.0.tgz#a7e3b8c1fdc4f0538b93b2dc2ddd53a40c6ab0f0"
+  integrity sha1-p+O4wf3E8FOLk7LcLd1TpAxqsPA=
 
 highlight.js@~10.7.0:
   version "10.7.3"
@@ -6090,17 +6053,17 @@ prosemirror-commands@^1.1.10:
 
 prosemirror-dropcursor@^1.3.5:
   version "1.3.5"
-  resolved "https://registry.nlark.com/prosemirror-dropcursor/download/prosemirror-dropcursor-1.3.5.tgz#d2808c17089df0e441ad66016aecc2b6457c8a1f"
+  resolved "https://registry.nlark.com/prosemirror-dropcursor/download/prosemirror-dropcursor-1.3.5.tgz?cache=0&sync_timestamp=1621931565862&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fprosemirror-dropcursor%2Fdownload%2Fprosemirror-dropcursor-1.3.5.tgz#d2808c17089df0e441ad66016aecc2b6457c8a1f"
   integrity sha1-0oCMFwid8ORBrWYBauzCtkV8ih8=
   dependencies:
     prosemirror-state "^1.0.0"
     prosemirror-transform "^1.1.0"
     prosemirror-view "^1.1.0"
 
-prosemirror-gapcursor@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.npm.taobao.org/prosemirror-gapcursor/download/prosemirror-gapcursor-1.1.5.tgz#0c37fd6cbb1d7c46358c2e7397f8da9a8b5c6246"
-  integrity sha1-DDf9bLsdfEY1jC5zl/jamotcYkY=
+prosemirror-gapcursor@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.nlark.com/prosemirror-gapcursor/download/prosemirror-gapcursor-1.2.0.tgz#28fb60bf3d9baf1f920907d2c3e613137204e8f3"
+  integrity sha1-KPtgvz2brx+SCQfSw+YTE3IE6PM=
   dependencies:
     prosemirror-keymap "^1.0.0"
     prosemirror-model "^1.0.0"
@@ -6126,7 +6089,7 @@ prosemirror-inputrules@^1.1.3:
 
 prosemirror-keymap@^1.0.0, prosemirror-keymap@^1.1.3:
   version "1.1.4"
-  resolved "https://registry.npm.taobao.org/prosemirror-keymap/download/prosemirror-keymap-1.1.4.tgz#8b481bf8389a5ac40d38dbd67ec3da2c7eac6a6d"
+  resolved "https://registry.nlark.com/prosemirror-keymap/download/prosemirror-keymap-1.1.4.tgz#8b481bf8389a5ac40d38dbd67ec3da2c7eac6a6d"
   integrity sha1-i0gb+DiaWsQNONvWfsPaLH6sam0=
   dependencies:
     prosemirror-state "^1.0.0"
@@ -6139,10 +6102,10 @@ prosemirror-model@^1.0.0, prosemirror-model@^1.14.3:
   dependencies:
     orderedmap "^1.1.0"
 
-prosemirror-schema-list@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.nlark.com/prosemirror-schema-list/download/prosemirror-schema-list-1.1.5.tgz#e7ad9e337ea3d77da6d6a4250f3d7bd51ae980a4"
-  integrity sha1-562eM36j132m1qQlDz171RrpgKQ=
+prosemirror-schema-list@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.nlark.com/prosemirror-schema-list/download/prosemirror-schema-list-1.1.6.tgz#c3e13fe2f74750e4a53ff88d798dc0c4ccca6707"
+  integrity sha1-w+E/4vdHUOSlP/iNeY3AxMzKZwc=
   dependencies:
     prosemirror-model "^1.0.0"
     prosemirror-transform "^1.0.0"
@@ -6162,7 +6125,16 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
   dependencies:
     prosemirror-model "^1.0.0"
 
-prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.20.0:
+prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.20.1:
+  version "1.20.1"
+  resolved "https://registry.nlark.com/prosemirror-view/download/prosemirror-view-1.20.1.tgz#174ba8ca358c73cc05e9a92a3d252bcf181ea337"
+  integrity sha1-F0uoyjWMc8wF6akqPSUrzxgeozc=
+  dependencies:
+    prosemirror-model "^1.14.3"
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.1.0"
+
+prosemirror-view@^1.20.0:
   version "1.20.0"
   resolved "https://registry.nlark.com/prosemirror-view/download/prosemirror-view-1.20.0.tgz#64198845f0d112c14a5594732c46a96ac3d9d828"
   integrity sha1-ZBmIRfDREsFKVZRzLEapasPZ2Cg=
@@ -7073,7 +7045,7 @@ timsort@^0.3.0:
 
 tippy.js@^6.3.1:
   version "6.3.1"
-  resolved "https://registry.nlark.com/tippy.js/download/tippy.js-6.3.1.tgz#3788a007be7015eee0fd589a66b98fb3f8f10181"
+  resolved "https://registry.npm.taobao.org/tippy.js/download/tippy.js-6.3.1.tgz#3788a007be7015eee0fd589a66b98fb3f8f10181"
   integrity sha1-N4igB75wFe7g/ViaZrmPs/jxAYE=
   dependencies:
     "@popperjs/core" "^2.8.3"
@@ -7382,15 +7354,6 @@ vue@3.2.4:
     "@vue/compiler-dom" "3.2.4"
     "@vue/runtime-dom" "3.2.4"
     "@vue/shared" "3.2.4"
-
-vue@^3.0.0:
-  version "3.2.9"
-  resolved "https://registry.nlark.com/vue/download/vue-3.2.9.tgz#f8373c0d78136e331ad079e18ed72deaa95be5f2"
-  integrity sha1-+Dc8DXgTbjMa0Hnhjtct6qlb5fI=
-  dependencies:
-    "@vue/compiler-dom" "3.2.9"
-    "@vue/runtime-dom" "3.2.9"
-    "@vue/shared" "3.2.9"
 
 vuex@^4.0.1:
   version "4.0.2"

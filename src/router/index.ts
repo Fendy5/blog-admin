@@ -33,7 +33,6 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     )
   })
   Router.beforeEach(to => {
-    console.log(to.fullPath)
     if (to.fullPath !== '/login' && !getToken()) {
       void Router.push('/login')
     }
