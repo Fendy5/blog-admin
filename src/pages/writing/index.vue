@@ -340,7 +340,8 @@ export default defineComponent({
   h4,
   h5,
   h6 {
-    line-height: 1.1;
+    line-height: 1.5;
+    margin-bottom: .25rem;
   }
 
   h1 {
@@ -349,14 +350,12 @@ export default defineComponent({
   }
 
   h2 {
-    margin-bottom: .25rem;
     margin-top: .75rem;
     font-size: 1.5rem;
     counter-reset: h3;
   }
 
   h3 {
-    margin-bottom: .25rem;
     margin-top: .5rem;
     font-size: 1.25rem;
     counter-reset: h4;
@@ -364,6 +363,7 @@ export default defineComponent({
 
   h4 {
     margin-top: .25rem;
+    font-size: 1rem;
     counter-reset: h5;
   }
 

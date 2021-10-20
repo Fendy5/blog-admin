@@ -11,16 +11,18 @@
               {{ i.title }}
             </span>
           </div>
-          <div class="text-caption text-grey">
+          <div class="text-caption text-grey ellipsis-2-lines">
             {{ i.summary }}
           </div>
         </q-card-section>
 
-        <q-card-actions>
-          <q-btn @click="editArticle(i.article_id)" flat color="primary" label="编辑"/>
-          <q-btn @click="deleteArticle(i.article_id)" flat color="negative" label="删除"/>
-          <q-space/>
-        </q-card-actions>
+        <div class="flex justify-between">
+          <div>
+            <q-btn @click="editArticle(i.article_id)" flat color="primary" label="编辑"/>
+            <q-btn @click="deleteArticle(i.article_id)" flat color="negative" label="删除"/>
+          </div>
+          <p class="view">阅读量：{{ i.view }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -37,6 +39,7 @@ export interface Article {
   cover: string
   summary: string
   title: string
+  view: number
   updated_at: string
 }
 
@@ -72,7 +75,7 @@ export default defineComponent({
       })
     }
     const viewArticle = (id: string) => {
-      window.location.href = `https://www.fendy5.cn/s/${id}`
+      window.location.href = `https://blog.fendy5.cn/s/${id}`
     }
     return {
       articles,
@@ -89,8 +92,16 @@ export default defineComponent({
   height: 100%;
   background: #ffffff;
 }
-
+.text-caption {
+  height: 2.75rem;
+}
 .cover {
   height: 175px;
+}
+.view {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  margin-right: 20px;
 }
 </style>
