@@ -334,14 +334,61 @@ export default defineComponent({
     padding: 0 1rem;
   }
 
-  //h1,
-  //h2,
-  //h3,
-  //h4,
-  //h5,
-  //h6 {
-  //  line-height: 1.1;
-  //}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  h1 {
+    @apply my-4 text-3xl;
+    counter-reset: h2;
+  }
+
+  h2 {
+    margin-bottom: .25rem;
+    margin-top: .75rem;
+    font-size: 1.5rem;
+    counter-reset: h3;
+  }
+
+  h3 {
+    margin-bottom: .25rem;
+    margin-top: .5rem;
+    font-size: 1.25rem;
+    counter-reset: h4;
+  }
+
+  h4 {
+    margin-top: .25rem;
+    counter-reset: h5;
+  }
+
+  counter-reset: h2;
+
+  h2 {
+    &:before {
+      counter-increment: h2;
+      content: counter(h2) "."
+    }
+  }
+
+  h3 {
+    &:before {
+      counter-increment: h3;
+      content: counter(h2) "." counter(h3) " "
+    }
+  }
+
+  h4 {
+    &:before {
+      counter-increment: h4;
+      content: counter(h2) "." counter(h3) "." counter(h4) " "
+    }
+  }
 
   code {
     background-color: rgba(#616161, 0.1);
