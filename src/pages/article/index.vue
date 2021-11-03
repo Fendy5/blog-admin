@@ -6,7 +6,7 @@
 
         <q-card-section>
           <div class="text-grey">{{ i.updated_at }}</div>
-          <div class="text-h5 q-mt-sm q-mb-xs">
+          <div class="text-h5 q-mt-sm q-mb-xs ellipsis">
             <span @click="viewArticle(i.article_id)" class="cursor-pointer">
               {{ i.title }}
             </span>
