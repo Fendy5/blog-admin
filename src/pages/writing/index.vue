@@ -25,9 +25,14 @@
                         color="primary"/>
           </div>
         </div>
-        <div class="main-btn form-item text-right">
-          <q-btn label="发布" type="submit" color="primary"/>
-          <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm"/>
+        <div class="main-btn form-item fx-between">
+          <div class="flex">
+            <q-btn @click="saveArticle" color="secondary" label="保存" />
+          </div>
+          <div class="flex">
+            <q-btn label="发布" type="submit" color="primary"/>
+            <q-btn label="重置" type="reset" color="primary" flat class="q-ml-sm"/>
+          </div>
         </div>
       </q-form>
       <q-dialog v-model="prompt" persistent>
@@ -188,6 +193,12 @@ export default defineComponent({
       }
     }
 
+    // 保存文章
+    function saveArticle (time?: string) {
+      article.realse_time = time || '2099-05-04 00:09:49'
+      submitArticle()
+    }
+
     function reset () {
       article.title = ''
       article.tags = []
@@ -199,6 +210,7 @@ export default defineComponent({
     }
 
     return {
+      saveArticle,
       editor,
       originImage,
       getScreenshot,
