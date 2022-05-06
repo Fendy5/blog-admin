@@ -28,6 +28,7 @@
         <div class="main-btn form-item fx-between">
           <div class="flex">
             <q-btn @click="saveArticle" color="secondary" label="保存" />
+            <q-btn @click="changeTimeDialog" color="white" flat text-color="black" class="q-ml-sm" label="定时发送" />
           </div>
           <div class="flex">
             <q-btn label="发布" type="submit" color="primary"/>
@@ -51,6 +52,20 @@
               </div>
             </q-form>
           </q-card-section>
+        </q-card>
+      </q-dialog>
+      <q-dialog v-model="timeDialog" persistent>
+        <q-card style="min-width: 630px;height:515px">
+          <div class="q-pt-md q-px-md">选择发送时间</div>
+          <div class="q-pa-md">
+            <div class="q-gutter-md row items-start">
+              <q-date v-model="article.release_time" mask="YYYY-MM-DD HH:mm" color="purple" />
+              <q-time v-model="article.release_time" mask="YYYY-MM-DD HH:mm" color="purple" />
+            </div>
+            <div class="text-right q-py-md">
+              <q-btn label="确定" @click="timingRelease" type="submit" color="primary"/>
+            </div>
+          </div>
         </q-card>
       </q-dialog>
     </div>
@@ -103,6 +118,7 @@ export default defineComponent({
     const prompt = ref(false), cropper = ref(), originImage = ref()
     const $router = useRouter()
     const articleId = ref<string>('')
+    const timeDialog = ref(false)
 
     const editor = useEditor({
       // content: '<p>I’m running tiptap with Vue.js. 🎉</p>',
@@ -117,7 +133,8 @@ export default defineComponent({
       summary: '',
       cover: '',
       content: '',
-      category_id: ''
+      category_id: '',
+      release_time: ''
     })
     // const editor = useEditor({
     //   content: '<p>正文从这里开始~</p>',
@@ -199,6 +216,17 @@ export default defineComponent({
       submitArticle()
     }
 
+    // 定时发送文章
+    function timingRelease () {
+      changeTimeDialog()
+      submitArticle()
+    }
+
+    // 切换时间选择器的状态
+    function changeTimeDialog () {
+      timeDialog.value = !timeDialog.value
+    }
+
     function reset () {
       article.title = ''
       article.tags = []
@@ -210,6 +238,9 @@ export default defineComponent({
     }
 
     return {
+      changeTimeDialog,
+      timeDialog,
+      timingRelease,
       saveArticle,
       editor,
       originImage,

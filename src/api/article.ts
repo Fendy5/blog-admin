@@ -16,7 +16,7 @@ export const editArticleApi = (data: any, id: string) =>
 
 export const getArticleListApi = (params?: any) =>
   api({
-    url: '/api/v1/articles',
+    url: '/api/v1/admin/articles',
     method: 'get',
     params
   })
