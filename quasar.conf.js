@@ -30,7 +30,7 @@ module.exports = configure(function (ctx) {
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
       'axios',
-      'index',
+      'index'
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -54,11 +54,11 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      env: {
-        BASE_API: ctx.dev
-          ? '/dev-api'
-          : '/'
-      },
+      // env: {
+      //   BASE_API: ctx.dev
+      //     ? '/dev-api'
+      //     : '/'
+      // },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
@@ -82,24 +82,23 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack (/* chain */) {
         //
-      },
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      proxy: {
-        // proxy all requests starting with /api to jsonplaceholder
-        '/dev-api': {
-          target: 'http://127.0.0.1:7036',
-          changeOrigin: true,
-          pathRewrite: {
-            '^/dev-api': '',
-          },
-        },
-      },
-      https: false,
+      // proxy: {
+      //   // proxy all requests starting with /api to jsonplaceholder
+      //   '/dev-api': {
+      //     target: 'http://127.0.0.1:7036',
+      //     changeOrigin: true,
+      //     pathRewrite: {
+      //       '^/dev-api': ''
+      //     }
+      //   }
+      // },
       port: 9432,
-      open: true, // opens browser window automatically
+      open: true // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

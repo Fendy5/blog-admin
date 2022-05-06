@@ -7,7 +7,7 @@ declare module '@vue/runtime-core' {
     $axios: AxiosInstance;
   }
 }
-const api = axios.create({ baseURL: process.env.BASE_API })
+const api = axios.create({ baseURL: '/' })
 
 export default boot(({
   app,
